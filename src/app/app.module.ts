@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent} from './login-page/login-page.component';
 import { InfoPgComponent } from './info-pg/info-pg.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

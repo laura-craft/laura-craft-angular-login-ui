@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 
 @Component({
@@ -14,25 +14,36 @@ export class LoginPageComponent implements OnInit {
   submitted = false;
   returnURL: string;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router
-  ) { }
+  constructor(private readonly fb: FormBuilder, private route: ActivatedRoute, private router: Router) { 
+    this.form = this.fb.group ({
+      firstName: [null, [Validators.required]],
+      lastName: [null, [Validators.required]],
+      email: [null, [Validators.required]], 
+      dateOfBirth: [null, [Validators.required], [Validators.max(2000)]]
+    });
+  
+  }
+  get f() { return this.form.controls; }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group ({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-    this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
-  get f() {return this.form.controls;}
-
-  onSubmit() {
-    this.submitted = true;
-
     
   }
 
-}
+  onSubmit() {
+    let NavigationExtras: NavigationExtras = {
+      queryParams: {
+        firstName: this.form.value.firstName,
+        lastName: this.form.value.lastName,
+        email: this.form.value.email,
+        dateOfBirth: this.form.value.dateOfBirth
+      }
+    };
+    this.router.navigate(['/info-pg'], NavigationExtras);
+
+    }
+  
+      }
+    
+
+    
+  
