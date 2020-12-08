@@ -9,28 +9,26 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-  form: FormGroup;
-  loading = false;
-  submitted = false;
-  returnURL: string;
+  public form: FormGroup;
+  
 
   constructor(private readonly fb: FormBuilder, private route: ActivatedRoute, private router: Router) { 
-    this.form = this.fb.group ({
-      firstName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
-      email: [null, [Validators.required]], 
-      dateOfBirth: [null, [Validators.required], [Validators.max(2000)]]
-    });
-  
+   
   }
   get f() { return this.form.controls; }
 
   ngOnInit(): void {
+    this.form = this.fb.group ({
+      firstName: [null, [Validators.required]],
+      lastName: [null, [Validators.required]],
+      email: [null, [Validators.required]], 
+      dateOfBirth: [null, [Validators.required, Validators.max(2000)]]
+    })
     
   }
 
   onSubmit() {
-    let NavigationExtras: NavigationExtras = {
+    let navigationExtras: NavigationExtras = {
       queryParams: {
         firstName: this.form.value.firstName,
         lastName: this.form.value.lastName,
@@ -38,7 +36,7 @@ export class LoginPageComponent implements OnInit {
         dateOfBirth: this.form.value.dateOfBirth
       }
     };
-    this.router.navigate(['/info-pg'], NavigationExtras);
+    this.router.navigate(['/info-pg'], navigationExtras);
 
     }
   
