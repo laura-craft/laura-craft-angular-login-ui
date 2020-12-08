@@ -6,7 +6,7 @@ import { InfoPgComponent } from './info-pg/info-pg.component'
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
-  { path: '', component: InfoPgComponent }
+  { path: 'info-pg', component: InfoPgComponent }
 ];
 
 @NgModule({
