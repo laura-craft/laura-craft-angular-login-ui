@@ -9,21 +9,23 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-  public form: FormGroup;
-  
+  form: FormGroup;
+  loading = false;
+  submitted = false;
+  returnURL: string;
 
   constructor(private readonly fb: FormBuilder, private route: ActivatedRoute, private router: Router) { 
-   
-  }
-  get f() { return this.form.controls; }
-
-  ngOnInit(): void {
     this.form = this.fb.group ({
-      firstName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
-      email: [null, [Validators.required]], 
+      firstName: [''],
+      lastName: [''],
+      email: [''], 
       dateOfBirth: [null, [Validators.required, Validators.max(2000)]]
     })
+  }
+ get f() { return this.form.controls; }
+
+  ngOnInit(): void {
+    
     
   }
 
