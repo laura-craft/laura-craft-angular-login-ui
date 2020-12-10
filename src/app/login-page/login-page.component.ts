@@ -16,9 +16,9 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private readonly fb: FormBuilder, private route: ActivatedRoute, private router: Router) { 
     this.form = this.fb.group ({
-      firstName: [''],
-      lastName: [''],
-      email: [''], 
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required]], 
       dateOfBirth: [null, [Validators.required, Validators.max(2000)]]
     })
   }
